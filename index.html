@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GTArm Cnotroller</title>
+    <script src="/socket.io/socket.io.js"></script>
+     <!-- Include jQuery Mobile stylesheets -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <!-- Include the jQuery library -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Include the jQuery Mobile library -->
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script>
+    var socket = io();
+    
+    socket.emit('hi');
+    socket.on('hi', function(msg){
+      $('#status').val(msg);
+    });
+
+    $( document ).ready(function () {
+      var cmdBtn = "button";
+      
+      $( cmdBtn ).on("taphold",function(){
+        sendCmd( $( this ).attr('id') );
+      });
+
+      $( cmdBtn ).mousedown(function() {
+        sendCmd( $( this ).attr('id') );
+      });
+
+      $( cmdBtn ).mouseup(function() {
+        sendCmd("x");
+      });
+
+      $("body").on("swipeleft",function(){
+        sendCmd("L");
+      });
+
+      $("body").on("swiperight",function(){
+        sendCmd("R");
+      });
+
+      $("body").on("tap",function(){
+        sendCmd("x");
+      });
+
+    });
+
+    function sendCmd( cmd )
+    {
+      socket.emit('cmd', cmd);
+    }
+     
+    </script>
+    <style type="text/css">
+    button {
+      margin: 10px 10px 10px 10px;
+      color: #fff;
+      width: 50%;
+      height: 100px;
+      text-decoration: none;
+    }
+    </style>
+  </head>
+  <body>
+    <div data-role="page">
+      <div data-role="header">
+        <h1>GTArm Controller</h1>
+      </div>
+      <div data-role="main" class="ui-content">
+        <button id="U" class="btn" data-icon="arrow-u">上</button>
+        <button id="D" class="btn" data-icon="arrow-d">下</button>
+        <button id="S" class="btn" data-icon="arrow-l">前</button>
+        <button id="B" class="btn" data-icon="arrow-r">後</button>
+        <button id="C" class="btn" data-icon="gear">夾</button>
+        <button id="Y" class="btn" data-icon="delete">放</button>
+      </div>
+      <div data-role="footer">
+        <h1>&copy; Single.9</h1>
+      </div>
+  </div>
+  </body>
+</html>

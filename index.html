@@ -14,10 +14,31 @@
 
     <script>
     var socket = io();
-    
+    var preFaceX = 0;
+    var faceEnabled = false;
+
     socket.emit('hi');
     socket.on('hi', function(msg){
-      $('#status').val(msg);
+      $('#server-status').removeClass('ui-icon-delete').addClass('ui-icon-check');
+    });
+
+    socket.on('pic', function(msg) {
+      $('#pic').html('<img src="' + msg + '">');
+    });
+
+    socket.on('facePic', function(msg) {
+      $('#face').html('<img src="' + msg + '">');
+    });
+
+    socket.on('enableFace', function( en ) {
+      faceEnabled = en;
+      if ( en ) {
+          $('#server-status').removeClass('ui-icon-check').addClass('ui-icon-plus');
+          $('#picWrap').show();
+        }else{
+          $('#server-status').removeClass('ui-icon-plus').addClass('ui-icon-check');
+          $('#picWrap').hide();
+        };
     });
 
     $( document ).ready(function () {
@@ -47,11 +68,22 @@
         sendCmd("x");
       });
 
+      $('#server-status').mouseup( function(){
+        enableFaceDetect( faceEnabled );
+      });
     });
 
     function sendCmd( cmd )
     {
       socket.emit('cmd', cmd);
+    }
+
+    function faceMove () {
+      socket.emit('req');
+    }
+
+    function enableFaceDetect (en) {
+      socket.emit('enableFace', en);
     }
      
     </script>
@@ -63,14 +95,29 @@
       height: 100px;
       text-decoration: none;
     }
+    img {
+      width: 100%;
+      height: auto;
+    }
+    .half {
+      width: 49%;
+      display: inline-block;
+    }
     </style>
   </head>
   <body>
     <div data-role="page">
       <div data-role="header">
-        <h1>GTArm Controller</h1>
+        <h1>
+          GTArm 
+          <a id="server-status" href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext"></a>
+        </h1>
       </div>
       <div data-role="main" class="ui-content">
+        <div id="picWrap">
+          <div id="face" class="half"></div>
+          <div id="pic" class="half"></div>
+        </div>
         <button id="U" class="btn" data-icon="arrow-u">上</button>
         <button id="D" class="btn" data-icon="arrow-d">下</button>
         <button id="S" class="btn" data-icon="arrow-l">前</button>

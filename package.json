@@ -1,0 +1,33 @@
+{
+  "name": "GTArm",
+  "version": "0.9.3636",
+  "description": "Using your face to control MeArm.Joystick ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/single9/GTArm.git"
+  },
+  "keywords": [
+    "MeArm",
+    "nodecv",
+    "opencv",
+    "arduino"
+  ],
+  "author": "Duye Chen, Single Zero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/single9/GTArm/issues"
+  },
+  "homepage": "https://github.com/single9/GTArm",
+  "dependencies": {
+    "express": "^4.13.0",
+    "mime": "^1.3.4",
+    "opencv": "git://github.com/peterbraden/node-opencv",
+    "serialport": "^1.7.4",
+    "socket.io": "^1.3.5"
+  }
+}

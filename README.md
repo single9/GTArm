@@ -1,6 +1,8 @@
 # GTArm
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/37ek74sKqtU" frameborder="0" allowfullscreen></iframe>
+![Imgur](http://i.imgur.com/A60RmJZ.jpg?1)
+
+Youtube: <https://www.youtube.com/watch?v=37ek74sKqtU>
 
 6月多時參加南部 Maker 展時所製作的機械手臂控制器，原本只有單純的控制，最後莫名其妙的變成了用臉去控制手臂移動的方向，然後在控制端上顯示手臂上攝影機所拍得的畫面。
 
